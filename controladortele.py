@@ -33,3 +33,12 @@ def actualizar_telefonos(nombre_telefono,marca,descripcion,precio,existencias,id
     conexion.commit()
     conexion.close()
 
+def obtener_name_proveedores():
+    conexion= conectar()
+    nameprove = []
+    with conexion.cursor() as cursor:
+        cursor.execute("select id_proveedor, nombre_proveedor from proveedores")
+        nameprove = cursor.fetchall()
+        
+    conexion.close()
+    return nameprove

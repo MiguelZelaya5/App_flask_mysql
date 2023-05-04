@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request,redirect
 from config import conectar
 from flask_mysqldb import MySQL
+from wtforms import SelectField
+from flask_wtf import FlaskForm
 import controladortele
 
 app = Flask(__name__)
@@ -59,6 +61,12 @@ def actualizar_juego():
                         existencias,id_proveedor,id_telefono)
     return redirect("/tablatelefonos")
 
+class TelefonoForm(FlaskForm):
+    id_proveedor = SelectField('Proveedores')
+
+    def __init__(self, *args, **kwargs):
+        super(TelefonoForm, self).__init__(*args, **kwargs)
+        self.id_proveedor.choices = [(str(proveedor[0]), proveedor[1]) for proveedor in controladortele.obtener_name_proveedores()]
     
 if __name__ == '__main__':
     app.run(debug=True)
