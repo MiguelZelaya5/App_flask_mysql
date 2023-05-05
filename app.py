@@ -29,18 +29,24 @@ def insert():
     estado= request.form["estado"]
     controladortele.insertar_telefono(nombre_telefono,marca,descripcion,
                                       precio,existencias,proveedor,estado)
-    return redirect("/agregartelefono.html")
+    return redirect("/tablatel")
 @app.route("/")
 @app.route("/tablatelefonos")
 def tablatelefonos():
     tablatelefonos = controladortele.obtener_telefonos()
-    return render_template("tablatelefonos.html", tablatelefonos=tablatelefonos)
+    return render_template("tablatelefonos.html",tablatelefonos=tablatelefonos)
 
 @app.route('/proveedores')
 def proveedores():
     proveedores=controladortele.obtener_name_proveedores()
    
     return render_template("agregartelefono.html", proveedores=proveedores)
+
+@app.route("/tablatel")
+def tablatel():
+    proveedores=controladortele.obtener_name_proveedores()
+    tablatelefonos = controladortele.obtener_telefonos()
+    return render_template("agregartelefono.html",tablatelefonos=tablatelefonos,proveedores=proveedores)
 
 @app.route("/eliminar_telefono", methods=["POST"])
 def eliminar_telefono():
