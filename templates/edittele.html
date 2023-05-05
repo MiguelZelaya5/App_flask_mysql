@@ -20,8 +20,15 @@ Agregar telefono
                 <input value="{{juego[3]}}" required type="number" class="input" placeholder="Precio" name="precio" id="precio">
                 <label for="nombre">Existencias:</label>
                 <input value="{{juego[1]}}" required type="text" class="input" placeholder="" name="existencias" id="existencias">
-                <label for="nombre">Proveedor:</label>
-                <input value="{{juego[1]}}" required type="text" class="input" placeholder="" name="id_proveedor" id="id_proveedor">
+                <label>Proveedor</label>
+                <div class="form-group">
+                    <select name="proveedor" id="search_category_id" class="form-control">
+                      <option value="" selected="selected">selecione el proveedor</option>
+                      {% for proveedor in proveedores %}
+                      <option value='{{proveedor[0]}}'>{{proveedor[1]}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
                 <label for="nombre">Estado:</label>
                 <input value="{{juego[1]}}" required type="text" class="input" placeholder="" name="estado" id="estado">
                 <button type="submit" class="button is-success mt-2">Guardar</button>
