@@ -12,9 +12,7 @@ app = Flask(__name__)
 mydb = conectar
 mysql = MySQL(app)
 
-@app.route("/agregartelefonos")
-def formulariotelefono():
-     return render_template("tablatelefonos.html")
+
 @app.route("/formularioagregartelefono")
 def formularioagregartelefono():
      return render_template("agregartelefono.html")
