@@ -1,23 +1,16 @@
 from flask import Flask, render_template, request,redirect
-from config import conectar
+import result
 from flask_mysqldb import MySQL
 from wtforms import SelectField
 from flask_wtf import FlaskForm
 import controladortele
+from mysql.connector import connect
+from config import conectar
+import mysql.connector
 
 app = Flask(__name__)
-mydb = conectar()
-mysql = MySQL(mydb)
-
-
-@app.route('/', methods=['GET'])
-def home():
-    return render_template('index.html')
-
-@app.route('/login', methods=["POST"])
-def login():
-    email=request.form('email')
-    password = request.form('password')
+mydb = conectar
+mysql = MySQL(app)
 
 @app.route("/agregartelefonos")
 def formulariotelefono():
@@ -34,12 +27,18 @@ def insert():
     estado= request.form["estado"]
     controladortele.insertar_telefono(nombre_telefono,marca,descripcion,
                                       precio,existencias,proveedor,estado)
-    return redirect("/tablatelefonos")
-@app.route("/")
+    return redirect("/tablatelefonos.html")
+
 @app.route("/tablatelefonos")
-def mostrartele():
+def tablatelefonos():
     telefonostable = controladortele.obtener_telefonos
     return render_template("tablatelefonos.html", telefonostable=telefonostable)
+@app.route("/")
+@app.route('/proveedores')
+def proveedores():
+    proveedores=controladortele.obtener_name_proveedores()
+   
+    return render_template("agregartelefono.html", proveedores=proveedores)
 
 @app.route("/eliminar_telefono", methods=["POST"])
 def eliminar_telefono():
@@ -61,12 +60,7 @@ def actualizar_juego():
                         existencias,id_proveedor,id_telefono)
     return redirect("/tablatelefonos")
 
-class TelefonoForm(FlaskForm):
-    id_proveedor = SelectField('Proveedores')
 
-    def __init__(self, *args, **kwargs):
-        super(TelefonoForm, self).__init__(*args, **kwargs)
-        self.id_proveedor.choices = [(str(proveedor[0]), proveedor[1]) for proveedor in controladortele.obtener_name_proveedores()]
-    
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=3000,debug=True)

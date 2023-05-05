@@ -35,10 +35,7 @@ def actualizar_telefonos(nombre_telefono,marca,descripcion,precio,existencias,id
 
 def obtener_name_proveedores():
     conexion= conectar()
-    nameprove = []
-    with conexion.cursor() as cursor:
-        cursor.execute("select id_proveedor, nombre_proveedor from proveedores")
-        nameprove = cursor.fetchall()
-        
-    conexion.close()
-    return nameprove
+    cursor=conexion.cursor()
+    cursor.execute("select id_proveedores, nombre_proveedor from proveedores")
+    proveedores = cursor.fetchall()  
+    return proveedores
