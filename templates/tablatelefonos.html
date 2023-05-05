@@ -3,3 +3,44 @@
 Tabla telefonos
 {% endblock %}
 {% block contenido %}
+
+<div class="container">
+	<div>
+		<div class="col-md-12 text-center"><h1>Lista de Telefonos</h1></div>
+	</div>
+
+	<table class="table table-hover table-striped table-bordered" id="example">
+		<thead style="background-color: rgb(202, 199, 194); color: #121213;">
+			<th>Id</th>
+			<th>Nombre Telefono</th>
+			<th>Marca</th>
+			<th>Descripcion</th>
+			<th>Precio</th>
+			<th>Existencias</th>
+			<th>Proveedor</th>
+			<th>Estado</th>
+		</thead>
+		<tbody>
+			{% for tablatelefono in tablatelefonos %}
+			<tr>
+				<td>{{ tablatelefono.id_telefono}}</td>
+				<td>{{ tablatelefono.nombre_telefono}}</td>
+				<td>{{ tablatelefono.marca }}</td>
+				<td>{{ tablatelefono.descripcion }}</td>
+				<td>{{ tablatelefono.precio }}</td>
+				<td>{{ tablatelefono.existencias }}</td>
+				<td>{{ tablatelefono.nombre_proveedor }}</td>
+				<td>{{ tablatelefono.estado }}</td>
+				<td>
+					<button href="/{{ tablatelefono.id_telefono}}/actualizar_telefono">Actualizar</button>
+					<button href="/{{ tablatelefono.id_telefono}}/eliminar_telefono">Eliminar</button>
+
+					
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+{% endblock %}

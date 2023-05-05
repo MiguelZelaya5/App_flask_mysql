@@ -31,8 +31,8 @@ def insert():
 
 @app.route("/tablatelefonos")
 def tablatelefonos():
-    telefonostable = controladortele.obtener_telefonos
-    return render_template("tablatelefonos.html", telefonostable=telefonostable)
+    tablatelefonos = controladortele.obtener_telefonos
+    return render_template("tablatelefonos.html", tablatelefonos=tablatelefonos)
 @app.route("/")
 @app.route('/proveedores')
 def proveedores():
@@ -46,7 +46,7 @@ def eliminar_telefono():
     controladortele.eliminar_telefono(id)
     return redirect("/tablatelefonos")
 
-@app.route("/actualizar_juego", methods=["POST"])
+@app.route("/actualizar_telefono", methods=["POST"])
 def actualizar_juego():
     id_telefono = request.form["id_telefono"]
     nombre_telefono = request.form["nombre_telefono"]
