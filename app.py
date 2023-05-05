@@ -4,6 +4,7 @@ from flask_mysqldb import MySQL
 from wtforms import SelectField
 from flask_wtf import FlaskForm
 import controladortele
+import controladorprove
 from mysql.connector import connect
 from config import conectar
 import mysql.connector
@@ -52,19 +53,63 @@ def eliminar_telefono():
     controladortele.eliminar_telefono(id)
     return redirect("/tablatelefonos")
 
+@app.route("/formulario_editar_telefono/<int:id_telefono>")
+def formulario_editar_telefono(id_telefono):
+    # Obtener el juego por ID
+    proveedores=controladortele.obtener_name_proveedores()
+    editar_telefono= controladortele.obtener_telefono_por_id(id_telefono)
+    return render_template("edittele.html", editar_telefono=editar_telefono,proveedores=proveedores)
+
+
 @app.route("/actualizar_telefono", methods=["POST"])
-def actualizar_juego():
+def actualizar_telefono():
     id_telefono = request.form["id_telefono"]
     nombre_telefono = request.form["nombre_telefono"]
-    marca = request.form["descripcion"]
+    marca = request.form["marca"]
 
     descripcion = request.form["descripcion"]
     precio = request.form["precio"]
     existencias = request.form["existencias"]
-    id_proveedor = request.form["id_proveedor"]
+    id_proveedor = request.form["proveedor"]
+    estado=request.form["estado"]
     controladortele.actualizar_telefonos(nombre_telefono,marca,descripcion,precio,
-                        existencias,id_proveedor,id_telefono)
+                        existencias,id_proveedor,estado,id_telefono)
     return redirect("/tablatelefonos")
+
+@app.route("/mostrartodoslosproveedores")
+def mostrartodoslosproveedores():
+    mostrartodoslosproveedores=controladorprove.obtener_prov()
+    return render_template("tablaproveedores.html",mostrartodoslosproveedores=mostrartodoslosproveedores)
+
+@app.route("/mostrartodoslosproveedoresinsert")
+def mostrartodoslosproveedoresinsert():
+    mostrartodoslosproveedores=controladorprove.obtener_prov()
+    return render_template("agregarproveedor.html",mostrartodoslosproveedores=mostrartodoslosproveedores)
+
+@app.route("/insertarproveedor", methods=["POST"])
+def insertarproveedor():
+    nombre_proveedor = request.form["nombre_proveedor"]
+    numero_telefonico=request.form["numero_telefonico"]
+    estado=request.form["estado"]
+    controladorprove.insertar_prov(nombre_proveedor,numero_telefonico,estado)
+    return redirect("/mostrartodoslosproveedoresinsert")
+
+@app.route("/eliminar_proveedor", methods=["POST"])
+def eliminar_proveedor():
+    id = request.form["id"]
+    controladorprove.eliminar_prov(id)
+    return redirect("/tablaproveedor")
+
+@app.route("/actualizar_proveedor", methods=["POST"])
+def actualizar_proveedor():
+    id_proveedores = request.form["id_proveedores"]
+    nombre_proveedor = request.form["nombre_proveedor"]
+    numero_telefonico = request.form["numero_telefonico"]
+    estado=request.form["estado"]
+    
+    controladortele.actualizar_telefonos(id_proveedores,nombre_proveedor,numero_telefonico,estado)
+    return redirect("/tablatelefonos")
+
 
 
 
