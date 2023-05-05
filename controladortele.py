@@ -12,7 +12,7 @@ def obtener_telefonos():
     conexion= conectar()
     telefonos = []
     with conexion.cursor() as cursor:
-        cursor.execute("select t.id_telefono, t.nombre_telefono, t.marca, t.descripcion, t.precio, t.existencias, p.nombre_proveedor,t.estado from telefonos t inner join proveedores p on t.id_proveedor=p.id_proveedores")
+        cursor.execute("SELECT t.id_telefono, t.nombre_telefono, t.marca, t.descripcion, t.precio, t.existencias, p.nombre_proveedor,t.estado FROM telefonos t INNER JOIN proveedores p ON t.id_proveedor=p.id_proveedores")
         telefonos = cursor.fetchall()
     conexion.close()
     return telefonos

@@ -28,12 +28,12 @@ def insert():
     controladortele.insertar_telefono(nombre_telefono,marca,descripcion,
                                       precio,existencias,proveedor,estado)
     return redirect("/tablatelefonos.html")
-
+@app.route("/")
 @app.route("/tablatelefonos")
 def tablatelefonos():
-    tablatelefonos = controladortele.obtener_telefonos
+    tablatelefonos = controladortele.obtener_telefonos()
     return render_template("tablatelefonos.html", tablatelefonos=tablatelefonos)
-@app.route("/")
+
 @app.route('/proveedores')
 def proveedores():
     proveedores=controladortele.obtener_name_proveedores()

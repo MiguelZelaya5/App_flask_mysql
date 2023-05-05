@@ -23,14 +23,14 @@ Tabla telefonos
 		<tbody>
 			{% for tablatelefono in tablatelefonos %}
 			<tr>
-				<td>{{ tablatelefono.id_telefono}}</td>
-				<td>{{ tablatelefono.nombre_telefono}}</td>
-				<td>{{ tablatelefono.marca }}</td>
-				<td>{{ tablatelefono.descripcion }}</td>
-				<td>{{ tablatelefono.precio }}</td>
-				<td>{{ tablatelefono.existencias }}</td>
-				<td>{{ tablatelefono.nombre_proveedor }}</td>
-				<td>{{ tablatelefono.estado }}</td>
+				<td>{{tablatelefono[0]}}</td>
+				<td>{{tablatelefono[1]}}</td>
+				<td>{{tablatelefono[2]}}</td>
+				<td>{{tablatelefono[3]}}</td>
+				<td>{{tablatelefono[4]}}</td>
+				<td>{{tablatelefono[5]}}</td>
+				<td>{{tablatelefono[6]}}</td>
+				<td>{{tablatelefono[7]}}</td>
 				<td>
 					<button href="/{{ tablatelefono.id_telefono}}/actualizar_telefono">Actualizar</button>
 					<button href="/{{ tablatelefono.id_telefono}}/eliminar_telefono">Eliminar</button>
