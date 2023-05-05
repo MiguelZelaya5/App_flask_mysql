@@ -14,8 +14,10 @@ mysql = MySQL(app)
 
 @app.route("/agregartelefonos")
 def formulariotelefono():
+     return render_template("tablatelefonos.html")
+@app.route("/formularioagregartelefono")
+def formularioagregartelefono():
      return render_template("agregartelefono.html")
-
 @app.route("/insert", methods=["POST"])
 def insert():
     nombre_telefono = request.form["nombre_telefono"]
@@ -27,7 +29,7 @@ def insert():
     estado= request.form["estado"]
     controladortele.insertar_telefono(nombre_telefono,marca,descripcion,
                                       precio,existencias,proveedor,estado)
-    return redirect("/tablatelefonos.html")
+    return redirect("/agregartelefono.html")
 @app.route("/")
 @app.route("/tablatelefonos")
 def tablatelefonos():

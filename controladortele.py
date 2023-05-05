@@ -1,10 +1,10 @@
 from config import conectar
 
-def insertar_telefono(nombre_telefon,marca,descripcion,precio,existencias,id_proveedor):
+def insertar_telefono(nombre_telefono,marca,descripcion,precio,existencias,id_proveedor,estado):
     conexion= conectar()
     with conexion.cursor() as cursor:
-        cursor.execute("INSERT INTO telefonos(nombre_telefon,marca,descripcion,precio,existencias,id_proveedor) VALUES (%s, %s, %s,%s, %s, %s)",
-                       (nombre_telefon,marca,descripcion,precio,existencias,id_proveedor))
+        cursor.execute("INSERT INTO telefonos(nombre_telefono,marca,descripcion,precio,existencias,id_proveedor,estado) VALUES (%s, %s, %s,%s, %s, %s, %s)",
+                       (nombre_telefono,marca,descripcion,precio,existencias,id_proveedor,estado))
     conexion.commit()
     conexion.close()
 
