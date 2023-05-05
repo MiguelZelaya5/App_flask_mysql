@@ -8,7 +8,10 @@ Tabla telefonos
 	<div>
 		<div class="col-md-12 text-center"><h1>Lista de Telefonos</h1></div>
 	</div>
-
+	<div class="d-flex justify-content-end">
+		<a href="{{url_for('formularioagregartelefono')}}" class="btn btn-primary btn-lg active ml-auto" role="button" aria-pressed="true">Agregar</a>
+	</div>
+	  
 	<table class="table table-hover table-striped table-bordered" id="example">
 		<thead style="background-color: rgb(202, 199, 194); color: #121213;">
 			<th>Id</th>
@@ -19,6 +22,7 @@ Tabla telefonos
 			<th>Existencias</th>
 			<th>Proveedor</th>
 			<th>Estado</th>
+			<th>Acciones</th>
 		</thead>
 		<tbody>
 			{% for tablatelefono in tablatelefonos %}
@@ -32,8 +36,13 @@ Tabla telefonos
 				<td>{{tablatelefono[6]}}</td>
 				<td>{{tablatelefono[7]}}</td>
 				<td>
+					<!--<button href="/{{ tablatelefono.id_telefono}}/agregartelefonos">Agregar</button>
 					<button href="/{{ tablatelefono.id_telefono}}/actualizar_telefono">Actualizar</button>
-					<button href="/{{ tablatelefono.id_telefono}}/eliminar_telefono">Eliminar</button>
+					<button href="/{{ tablatelefono.id_telefono}}/eliminar_telefono">Eliminar</button>-->
+					
+					
+					<a href="{{url_for('formularioagregartelefono')}}" class="btn btn-primary btn-sm active"> Actualizar</a>
+					<a href="/{{ tablatelefono.id_telefono}}/eliminar_telefono" class="btn btn-danger btn-sm active"> Eliminar </a>
 
 					
 				</td>
