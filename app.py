@@ -76,6 +76,8 @@ def actualizar_telefono():
                         existencias,id_proveedor,estado,id_telefono)
     return redirect("/tablatelefonos")
 
+
+
 @app.route("/mostrartodoslosproveedores")
 def mostrartodoslosproveedores():
     mostrartodoslosproveedores=controladorprove.obtener_prov()
@@ -84,7 +86,7 @@ def mostrartodoslosproveedores():
 @app.route("/mostrartodoslosproveedoresinsert")
 def mostrartodoslosproveedoresinsert():
     mostrartodoslosproveedores=controladorprove.obtener_prov()
-    return render_template("agregarproveedor.html",mostrartodoslosproveedores=mostrartodoslosproveedores)
+    return render_template("agregarprov.html",mostrartodoslosproveedores=mostrartodoslosproveedores)
 
 @app.route("/insertarproveedor", methods=["POST"])
 def insertarproveedor():
@@ -92,7 +94,7 @@ def insertarproveedor():
     numero_telefonico=request.form["numero_telefonico"]
     estado=request.form["estado"]
     controladorprove.insertar_prov(nombre_proveedor,numero_telefonico,estado)
-    return redirect("/mostrartodoslosproveedoresinsert")
+    return redirect("/agregarprov.html")
 
 @app.route("/eliminar_proveedor", methods=["POST"])
 def eliminar_proveedor():
@@ -109,6 +111,15 @@ def actualizar_proveedor():
     
     controladortele.actualizar_telefonos(id_proveedores,nombre_proveedor,numero_telefonico,estado)
     return redirect("/tablatelefonos")
+
+@app.route("/formulario_editar_proveedor/<int:id_proveedores>")
+def formulario_editar_telefono(id_proveedores):
+    # Obtener el juego por ID
+    obtenpro_id=controladorprove.obtener_prove_por_id(id_proveedores)
+    return render_template("editprove.html", obtenpro_id=obtenpro_id)
+
+
+
 
 
 
