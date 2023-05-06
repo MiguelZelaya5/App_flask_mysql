@@ -1,0 +1,87 @@
+{% extends "todointerfaz.html" %}
+{% block titulo %}
+Editar Telefono
+{% endblock %}
+{% block contenido %}
+<section class="section">
+    <div class="columns">
+        <div class="column">
+            <h3 class="is-size-3">Editar compra</h3>
+            <form action="{{url_for('actualizar_compra')}}" method="post" >
+                {# Enviar el id en un campo oculto #}
+                <input type="hidden" name="id_compra" value="{{obtencompra_id[0]}}">
+                <div class="form-group row mb-4">
+                    <div class="col-sm-4">
+                        <label>Cliente</label>
+                        <div class="form-group">
+                            <select name="id_cliente" id="search_category_id" class="form-control">
+                                
+                                <option value="{{obtencompra_id[1]}}" >{{obtencompra_id[2]}}</option>
+                                
+                              
+                                {% for obtencompraal in obtencompraall %}
+                                <option value='{{obtencompraal[0]}}'>{{obtencompraal[1]}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row mb-4">
+                    <div class="col-sm-4">
+                        <label>Telefono</label>
+                        <div class="form-group">
+                            <select name="id_telefono" id="search_category_id" class="form-control">
+                                
+                                <option value="{{obtencompra_id[3]}}" >{{obtencompra_id[4]}}</option>
+                                
+                              
+                                {% for obtenteleal in obtenteleall %}
+                                <option value='{{obtenteleal[0]}}'>{{obtenteleal[1]}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row mb-4">
+                    <div class="col-sm-4">
+                        <label for="descripcion">cantidad</label>
+                        <input value="{{obtencompra_id[5]}}" required type="text" class="form-control" placeholder="Descripción" name="cantidad" id="cantidad">
+                    </div>
+                </div>
+                <div class="form-group row mb-4">
+                    <div class="col-sm-4">
+                        <label for="precio">Precio</label>
+                        <input value="{{obtencompra_id[6]}}" required type="number" class="form-control" placeholder="Precio" name="precio" id="precio">
+                    </div>
+                </div>
+                <div class="form-group row mb-4">
+                    <div class="col-sm-4">
+                        <label for="existencias">fecha compra:</label>
+                        <input value="{{obtencompra_id[7]}}" required type="text" class="form-control" placeholder="" name="fecha_compra" id="fecha_compra">
+                    </div>
+                </div>
+                <div class="form-group row mb-4">
+                    <div class="col-sm-4">
+                        <label for="existencias">Estado:</label>
+                        <input value="{{obtencompra_id[8]}}" required type="text" class="form-control" placeholder="" name="estado" id="estado">
+                    </div>
+                </div>
+                <div class="form-group row mb-4">
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-primary btn-group-lg active">Guardar</button>
+                        <a href="{{url_for('mostrartodoslascompras')}}" class="btn btn-primary btn-group-lg active">Volver</a>
+                    </div>
+                </div>
+                
+                
+                
+               
+               
+               
+                
+               
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

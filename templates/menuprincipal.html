@@ -1,80 +1,120 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content = "Wiwidth=device=width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-        <title>App</title>
-    </head>
-    <body>
-        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-            <a class="navbar-brand" href="#">
-                MOVIL STORE SV
-            </a>
-            <div class="collapse navbar-collapse" id="navbarScroll">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
-                          Telefonos
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                          <li><a class="dropdown-item" href="#">Ingresar nuevo Telefono</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Actualizar datos de Telefonos</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Eliminar Telefono</a></li>
-                        </ul>
-                      </li>
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
-                          Clientes
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                          <li><a class="dropdown-item" href="#">Ingresar nuevo Cliente</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Actualizar datos de Clientes</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Eliminar Clientes</a></li>
-                        </ul>
-                      </li>
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
-                          Proveedores
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                          <li><a class="dropdown-item" href="#">Ingresar nuevo Proveedor</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Actualizar datos de Proveedores</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Eliminar Proveedores</a></li>
-                        </ul>
-                      </li>
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white">
-                          Compras
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                          <li><a class="dropdown-item" href="#">Ingresar nueva Compra</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Actualizar datos de las Compras</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Eliminar Compras</a></li>
-                        </ul>
-                      </li>
-                    
-                    
-                    
-                    
-                    <li class="nav-item">
-                        <li class="nav-item ml-auto">
-                            <button class="btn btn-info" value="Registrate">Cerrar sesión</button>
-                        </li>
+{% extends "todointerfaz.html" %}
+{% block titulo %}
+Tabla telefonos
+{% endblock %}
+{% block contenido %}
+
+<div class="container">
+	<div>
+		<div class="col-md-12 text-center"><h1>Todos los Registros</h1></div>
+	</div>
+
+	<br />
+  <h2>Tabla Telefono</h2>
+	<table class="table table-hover table-striped table-bordered" id="example">
+		<thead style="background-color: rgb(202, 199, 194); color: #121213;">
+			<th>Id</th>
+			<th>Nombre Telefono</th>
+			<th>Marca</th>
+			<th>Descripcion</th>
+			<th>Precio</th>
+			<th>Existencias</th>
+			<th>Proveedor</th>
+			<th>Estado</th>
+
+		</thead>
+		<tbody>
+			{% for tablatelefono in tablatelefonos %}
+			<tr>
+				<td>{{tablatelefono[0]}}</td>
+				<td>{{tablatelefono[1]}}</td>
+				<td>{{tablatelefono[2]}}</td>
+				<td>{{tablatelefono[3]}}</td>
+				<td>{{tablatelefono[4]}}</td>
+				<td>{{tablatelefono[5]}}</td>
+        <td>{{tablatelefono[6]}}</td>
+        <td>{{tablatelefono[7]}}</td>
+
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+  <h2>Tabla Proveedores</h2>
+  <table class="table table-hover table-striped table-bordered" id="example">
+		<thead style="background-color: rgb(202, 199, 194); color: #121213;">
+			<th>Id</th>
+			<th>Nombre Proveedor</th>
+			<th>Numero de Telefono</th>
+			<th>Estado</th>
       
-                    </li>
-               
-            </div>
-        </nav>
-    </body>
-</html>
+		</thead>
+		<tbody>
+			{% for mostrartodoslosproveedore in mostrartodoslosproveedores %}
+			<tr>
+				<td>{{mostrartodoslosproveedore[0]}}</td>
+				<td>{{mostrartodoslosproveedore[1]}}</td>
+				<td>{{mostrartodoslosproveedore[2]}}</td>
+				<td>{{mostrartodoslosproveedore[3]}}</td>
+					
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+  <h2>Tabal Clientes</h2>
+	<table class="table table-hover table-striped table-bordered" id="example">
+		<thead style="background-color: rgb(202, 199, 194); color: #121213;">
+			<th>Id</th>
+			<th>Nombre Clientes</th>
+			<th>Numero de Telefono</th>
+			<th>Direccion</th>
+		</thead>
+		<tbody>
+			{% for mostrartodosloscliente in mostrartodoslosclientes %}
+			<tr>
+				<td>{{mostrartodosloscliente[0]}}</td>
+				<td>{{mostrartodosloscliente[1]}}</td>
+				<td>{{mostrartodosloscliente[2]}}</td>
+				<td>{{mostrartodosloscliente[3]}}</td>
+					
+					
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+  <h2>Tabla Compra</h2>
+  <table class="table table-hover table-striped table-bordered" id="example">
+		<thead style="background-color: rgb(202, 199, 194); color: #121213;">
+			<th>Id</th>
+			<th>Nombre Cliente</th>
+			<th>Nombre del Telefono</th>
+			<th>Cantidad</th>
+			<th>Precio</th>
+			<th>Fecha de Compra</th>
+			<th>Estado</th>
+            
+			
+		</thead>
+		<tbody>
+			{% for mostrartodoslascompra in mostrartodoslascompras %}
+			<tr>
+				<td>{{mostrartodoslascompra[0]}}</td>
+				<td>{{mostrartodoslascompra[1]}}</td>
+				<td>{{mostrartodoslascompra[2]}}</td>
+				<td>{{mostrartodoslascompra[3]}}</td>
+				<td>{{mostrartodoslascompra[4]}}</td>
+				<td>{{mostrartodoslascompra[5]}}</td>
+				<td>{{mostrartodoslascompra[6]}}</td>
+				
+					
+					
+				
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+{% endblock %}

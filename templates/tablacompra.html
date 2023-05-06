@@ -1,0 +1,59 @@
+{% extends "todointerfaz.html" %}
+{% block titulo %}
+Tabla telefonos
+{% endblock %}
+{% block contenido %}
+
+<div class="container">
+	<div>
+		<div class="col-md-12 text-center"><h1>Lista de Compras</h1></div>
+	</div>
+	<div class="d-flex justify-content-end">
+		<a href="{{url_for('mostrarteleymostrarcompra')}}" class="btn btn-primary btn-md active ml-auto" role="button" aria-pressed="true">Agregar</a>
+		
+	</div>
+	<br />
+	<table class="table table-hover table-striped table-bordered" id="example">
+		<thead style="background-color: rgb(202, 199, 194); color: #121213;">
+			<th>Id</th>
+			<th>Nombre Cliente</th>
+			<th>Nombre del Telefono</th>
+			<th>Cantidad</th>
+			<th>Precio</th>
+			<th>Fecha de Compra</th>
+			<th>Estado</th>
+            <th>Acciones</th>
+			
+		</thead>
+		<tbody>
+			{% for mostrartodoslascompra in mostrartodoslascompras %}
+			<tr>
+				<td>{{mostrartodoslascompra[0]}}</td>
+				<td>{{mostrartodoslascompra[1]}}</td>
+				<td>{{mostrartodoslascompra[2]}}</td>
+				<td>{{mostrartodoslascompra[3]}}</td>
+				<td>{{mostrartodoslascompra[4]}}</td>
+				<td>{{mostrartodoslascompra[5]}}</td>
+				<td>{{mostrartodoslascompra[6]}}</td>
+				<td class="col-sm-2">
+					
+					<div class="d-flex justify-content-center">
+						<a href="{{url_for('formulario_editar_compra',id_compra=mostrartodoslascompra[0])}}" class="btn btn-primary btn-sm active"> Actualizar</a>
+						<div class="mx-2"></div>
+						<form action="{{url_for('eliminar_compra')}}" method="POST">
+							<input type="hidden" name="id" value="{{mostrartodoslascompra[0]}}">
+							<button class="btn btn-danger">Eliminar</button>
+						</form>
+					</div>
+					
+					
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	
+</div>
+
+{% endblock %}

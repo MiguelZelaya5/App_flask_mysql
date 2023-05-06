@@ -1,0 +1,99 @@
+{% extends "todointerfaz.html" %}
+{% block titulo %}
+Agregar telefono
+{% endblock %}
+{% block contenido %}
+<section class="section">
+    <div class="colums">
+      <div class="column">
+        <h3 class="is-size-3">Compra</h3>
+        <!--Falta el metodo-->
+        <form action="{{ url_for('insertarcompra') }}" method="POST" >
+        <div class="form-group row mb-4">
+            <div class="col-sm-6">
+              <label>Cliente</label>
+              <div class="form-group">
+                <select name="id_cliente" id="search_category_id" class="form-control">
+                  <option value="" selected="selected">selecione el cliente</option>
+                  {% for nombreclient in nombrecliente %}
+                  <option value='{{nombreclient[0]}}'>{{nombreclient[1]}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+        </div>
+        <div class="form-group row mb-4">
+            <div class="col-sm-6">
+              <label>Telefono</label>
+              <div class="form-group">
+                <select name="id_telefono" id="search_category_id" class="form-control">
+                  <option value="" selected="selected">selecione un Telefono</option>
+                  {% for nombrestel in nombrestele %}
+                  <option value='{{nombrestel[0]}}'>{{nombrestel[1]}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+        </div>
+        <div class="form-group row mb-4">
+            <div class="col-sm-6">
+              <label>Cantidad</label>
+              <input type="text" class="form-control" name="cantidad">
+            </div>
+        </div>
+        <div class="form-group row mb-4">
+          <div class="col-sm-6">
+            <label>Precio</label>
+            <input type="text" class="form-control" name="precio">
+          </div>
+        </div>
+        <div class="form-group row mb-4">
+            <div class="col-sm-6">
+                <label>Fecha de la compra</label>
+                <input type="text" class="form-control" name="fecha_compra">
+            </div>
+        </div>
+        <div class="form-group row mb-4">
+            <div class="col-sm-6">
+                <label>Estado</label>
+                <input type="text" class="form-control" name="estado">
+            </div>
+        </div>
+        
+          
+          <div class="form-group row mb-4">
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn-primary btn-group-lg active">Agregar</button>
+              <a href="{{url_for('mostrartodoslascompras')}}" class="btn btn-primary btn-group-lg active">Volver</a>
+            </div>
+          </div>
+          <table class="table table-hover table-striped table-bordered" id="example">
+            <thead style="background-color: rgb(202, 199, 194); color: #121213;">
+                <th>Id </th>
+                <th>Clientes</th>
+                <th>Telefono</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Fecha de Compra</th>
+                <th>Estado</th>
+              
+            </thead>
+            <tbody>
+              {% for tablacompr in tablacompra %}
+              <tr>
+                <td>{{tablacompr[0]}}</td>
+                <td>{{tablacompr[1]}}</td>
+                <td>{{tablacompr[2]}}</td>
+                <td>{{tablacompr[3]}}</td>
+                <td>{{tablacompr[4]}}</td>
+                <td>{{tablacompr[5]}}</td>
+                <td>{{tablacompr[6]}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -25,6 +25,10 @@ usuarios = [
 def index():
     return render_template("index.html")
 
+@app.route("/cerrarCesion")
+def cerrarCesion():
+    return render_template("index.html")
+
 @app.route("/login", methods=["POST"])
 def login():
     usuario = request.form["usuario"]
@@ -32,9 +36,10 @@ def login():
     
     for u in usuarios:
         if u["usuario"] == usuario and u["contraseña"] == contraseña:
-            return redirect("tablatelefonos")
+            return redirect("menuPricipal")
     
     return "Usuario o contraseña incorrectos"
+
 @app.route("/formularioagregartelefono")
 def formularioagregartelefono():
      return render_template("agregartelefono.html")
@@ -184,8 +189,8 @@ def formulario_editar_cliente(id_clientes):
     return render_template("editclientes.html", obtenclien_id=obtenclien_id)
 
 #----------------------metodos de cliente-------------------------------
-@app.route("/mostrarteleymostrarcliente")
-def mostrarteleymostrarcliente():
+@app.route("/mostrarteleymostrarcompra")
+def mostrarteleymostrarcompra():
     nombrestele=controladorcompra.obtener_name_telefono()
     nombrecliente=controladorcompra.obtener_name_cliente()
     tablacompra=controladorcompra.obtener_compra()
@@ -205,7 +210,7 @@ def insertarcompra():
     fecha_compra=request.form["fecha_compra"]
     estado=request.form["estado"]
     controladorcompra.insertar_compra(id_cliente,id_telefono,cantidad,precio,fecha_compra,estado)
-    return redirect("/mostrarteleymostrarcliente")
+    return redirect("/mostrarteleymostrarcompra")
 
 @app.route("/eliminar_compra", methods=["POST"])
 def eliminar_compra():
@@ -222,16 +227,25 @@ def actualizar_compra():
     precio = request.form["precio"]
     fecha_compra=request.form["fecha_compra"]
     estado=request.form["estado"]
-    controladorclien.actualizar_clientes(id_compra,id_cliente,id_telefono,cantidad,precio,fecha_compra,estado)
+    controladorcompra.actualizar_compra(id_cliente,id_telefono,cantidad,precio,fecha_compra,estado,id_compra)
     return redirect("/mostrartodoslascompras")
 
-@app.route("/formulario_editar_cliente/<int:id_clientes>")
-def formulario_editar_cliente(id_clientes):
+@app.route("/formulario_editar_compra/<int:id_compra>")
+def formulario_editar_compra(id_compra):
     # Obtener el juego por ID
-    obtenclien_id=controladorclien.obtener_cliente_por_id(id_clientes)
-    return render_template("editclientes.html", obtenclien_id=obtenclien_id)
+    obtencompra_id=controladorcompra.obtener_compra_por_id(id_compra)
+    obtencompraall=controladorcompra.obtener_name_cliente()
+    obtenteleall=controladorcompra.obtener_name_telefono()
+    return render_template("editcompra.html", obtencompra_id=obtencompra_id, obtencompraall=obtencompraall, obtenteleall=obtenteleall)
 
-
+@app.route("/menuPricipal")
+def menuPricipal():
+    tablatelefonos = controladortele.obtener_telefonos()
+    mostrartodoslosproveedores=controladorprove.obtener_prov()
+    mostrartodoslosclientes=controladorclien.obtener_clientes()
+    mostrartodoslascompras=controladorcompra.obtener_compra()
+    
+    return render_template("menuprincipal.html",tablatelefonos=tablatelefonos, mostrartodoslosproveedores=mostrartodoslosproveedores, mostrartodoslosclientes=mostrartodoslosclientes, mostrartodoslascompras=mostrartodoslascompras)
 
 if __name__ == '__main__':
     app.run(port=3000,debug=True)
