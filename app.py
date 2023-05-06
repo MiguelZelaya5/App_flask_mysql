@@ -5,6 +5,7 @@ from wtforms import SelectField
 from flask_wtf import FlaskForm
 import controladortele
 import controladorprove
+import controladorclien
 from mysql.connector import connect
 from config import conectar
 import mysql.connector
@@ -122,10 +123,45 @@ def formulario_editar_proveedor(id_proveedores):
     return render_template("editprove.html", obtenpro_id=obtenpro_id)
 
 
+@app.route("/mostrartodoslosclientes")
+def mostrartodoslosclientes():
+    mostrartodoslosclientes=controladorclien.obtener_clientes()
+    return render_template("tablaclientes.html",mostrartodoslosclientes=mostrartodoslosclientes)
 
+@app.route("/mostrartodoslosclientesinsert")
+def mostrartodoslosclientesinsert():
+    mostrartodoslosclientesinsert=controladorclien.obtener_clientes()
+    return render_template("agregarclientes.html",mostrartodoslosclientesinsert=mostrartodoslosclientesinsert)
 
+@app.route("/insertarcliente", methods=["POST"])
+def insertarcliente():
+    nombre_cliente = request.form["nombre_cliente"]
+    numero_telefono=request.form["numero_telefono"]
+    direccion=request.form["direccion"]
+    controladorclien.insertar_clientes(nombre_cliente,numero_telefono,direccion)
+    return redirect("/mostrartodoslosclientesinsert")
 
+@app.route("/eliminar_cliente", methods=["POST"])
+def eliminar_cliente():
+    id = request.form["id"]
+    controladorclien.conectar(id)
+    return redirect("/mostrartodoslosclientes")
 
+@app.route("/actualizar_cliente", methods=["POST"])
+def actualizar_cliente():
+    id_clientes = request.form["id_clientes"]
+    nombre_cliente = request.form["nombre_cliente"]
+    numero_telefono = request.form["numero_telefono"]
+    direccion=request.form["direccion"]
+    
+    controladorclien.actualizar_clientes(id_clientes,nombre_cliente,numero_telefono,direccion)
+    return redirect("/mostrartodoslosclientes")
+
+@app.route("/formulario_editar_cliente/<int:id_clientes>")
+def formulario_editar_cliente(id_clientes):
+    # Obtener el juego por ID
+    obtenclien_id=controladorprove.obtener_prove_por_id(id_clientes)
+    return render_template("editclientes.html", obtenclien_id=obtenclien_id)
 
 if __name__ == '__main__':
     app.run(port=3000,debug=True)
