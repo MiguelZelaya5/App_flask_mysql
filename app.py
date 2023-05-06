@@ -196,29 +196,34 @@ def mostrartodoslascompras():
     mostrartodoslascompras=controladorcompra.obtener_compra()
     return render_template("tablacompra.html",mostrartodoslascompras=mostrartodoslascompras)
 
-@app.route("/insertarcliente", methods=["POST"])
-def insertarcliente():
-    nombre_cliente = request.form["nombre_cliente"]
-    numero_telefono=request.form["numero_telefono"]
-    direccion=request.form["direccion"]
-    controladorclien.insertar_clientes(nombre_cliente,numero_telefono,direccion)
-    return redirect("/mostrartodoslosclientesinsert")
+@app.route("/insertarcompra", methods=["POST"])
+def insertarcompra():
+    id_cliente=request.form["id_cliente"]
+    id_telefono=request.form["id_telefono"]
+    cantidad=request.form["cantidad"]
+    precio=request.form["precio"]
+    fecha_compra=request.form["fecha_compra"]
+    estado=request.form["estado"]
+    controladorcompra.insertar_compra(id_cliente,id_telefono,cantidad,precio,fecha_compra,estado)
+    return redirect("/mostrarteleymostrarcliente")
 
-@app.route("/eliminar_cliente", methods=["POST"])
-def eliminar_cliente():
+@app.route("/eliminar_compra", methods=["POST"])
+def eliminar_compra():
     id = request.form["id"]
-    controladorclien.eliminar_cliente(id)
-    return redirect("/mostrartodoslosclientes")
+    controladorcompra.eliminar_compra(id)
+    return redirect("/mostrartodoslascompras")
 
-@app.route("/actualizar_cliente", methods=["POST"])
-def actualizar_cliente():
-    id_clientes = request.form["id_clientes"]
-    nombre_cliente = request.form["nombre_cliente"]
-    numero_telefono = request.form["numero_telefono"]
-    direccion=request.form["direccion"]
-    
-    controladorclien.actualizar_clientes(nombre_cliente,numero_telefono,direccion,id_clientes)
-    return redirect("/mostrartodoslosclientes")
+@app.route("/actualizar_compra", methods=["POST"])
+def actualizar_compra():
+    id_compra=request.form["id_compra"]
+    id_cliente = request.form["id_cliente"]
+    id_telefono = request.form["id_telefono"]
+    cantidad = request.form["cantidad"]
+    precio = request.form["precio"]
+    fecha_compra=request.form["fecha_compra"]
+    estado=request.form["estado"]
+    controladorclien.actualizar_clientes(id_compra,id_cliente,id_telefono,cantidad,precio,fecha_compra,estado)
+    return redirect("/mostrartodoslascompras")
 
 @app.route("/formulario_editar_cliente/<int:id_clientes>")
 def formulario_editar_cliente(id_clientes):

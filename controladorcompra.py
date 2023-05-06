@@ -25,11 +25,11 @@ def eliminar_compra(id_compra):
     conexion.commit()
     conexion.close()
 
-def actualizar_compra(cantidad, precio, fecha_compra, id_compra, id_cliente, id_telefono):
+def actualizar_compra(id_compra,id_cliente,id_telefono,cantidad,precio,fecha_compra,estado):
     conexion = conectar()
     with conexion.cursor() as cursor:
-        cursor.execute("UPDATE compra SET id_cliente= %s,id_telefono= %s, cantidad = %s, precio = %s, fecha_compra = %s,  WHERE id_compra = %s",
-                       (id_cliente, id_telefono,cantidad, precio, fecha_compra, id_compra))
+        cursor.execute("UPDATE compra SET id_cliente= %s,id_telefono= %s, cantidad = %s, precio = %s, fecha_compra = %s, estado = %s  WHERE id_compra = %s",
+                       (id_cliente, id_telefono,cantidad, precio, fecha_compra,estado, id_compra))
     conexion.commit()
     conexion.close()
 
@@ -46,3 +46,10 @@ def obtener_name_telefono():
     cursor.execute("SELECT id_telefono, nombre_telefono FROM telefonos")
     telefonos = cursor.fetchall()  
     return telefonos
+
+def obtener_compra_por_id(id_compra):
+    conexion = conectar()
+    cursor=conexion.cursor()
+    cursor.execute("select c.id_compra , c.id_cliente, cl.nombre_cliente, c.id_telefono, te.nombre_telefono, c.cantidad, c.precio , c.fecha_compra, c.estado  from compra c inner join clientes cl on c.id_cliente=cl.id_clientes inner join telefonos te on c.id_telefono=te.id_telefono WHERE c.id_compra = %s",(id_compra))
+    actu= cursor.fetchone()
+    return actu
