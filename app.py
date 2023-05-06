@@ -27,7 +27,7 @@ def index():
 
 @app.route("/cerrarCesion")
 def cerrarCesion():
-    return render_template("index.html")
+    return redirect("/")
 
 @app.route("/login", methods=["POST"])
 def login():
