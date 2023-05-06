@@ -44,6 +44,6 @@ def obtener_name_proveedores():
 def obtener_telefono_por_id(id_telefono):
     conexion = conectar()
     cursor=conexion.cursor()
-    cursor.execute("SELECT t.id_telefono,t.nombre_telefono,t.marca,t.descripcion,t.precio,t.existencias,p.id_proveedores,p.nombre_proveedor,t.estado from telefonos t left join proveedores p on t.id_proveedor=p.id_proveedores WHERE t.id_telefono = %s",(id_telefono))
+    cursor.execute("SELECT t.id_telefono,t.nombre_telefono,t.marca,t.descripcion,t.precio,t.existencias,p.id_proveedores,p.nombre_proveedor,t.estado from telefonos t inner join proveedores p on t.id_proveedor=p.id_proveedores WHERE t.id_telefono = %s",(id_telefono))
     actu= cursor.fetchone()
     return actu
