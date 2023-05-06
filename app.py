@@ -14,7 +14,26 @@ app = Flask(__name__)
 mydb = conectar
 mysql = MySQL(app)
 
+usuarios = [
+    {"usuario": "juan", "contraseña": "1234"},
+    {"usuario": "ana", "contraseña": "abcd"},
+    {"usuario": "pedro", "contraseña": "qwerty"}
+]
 
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/login", methods=["POST"])
+def login():
+    usuario = request.form["usuario"]
+    contraseña = request.form["contraseña"]
+    
+    for u in usuarios:
+        if u["usuario"] == usuario and u["contraseña"] == contraseña:
+            return redirect("tablatelefonos")
+    
+    return "Usuario o contraseña incorrectos"
 @app.route("/formularioagregartelefono")
 def formularioagregartelefono():
      return render_template("agregartelefono.html")
@@ -33,7 +52,7 @@ def insert():
     controladortele.insertar_telefono(nombre_telefono,marca,descripcion,
                                       precio,existencias,proveedor,estado)
     return redirect("/tablatel")
-@app.route("/")
+
 @app.route("/tablatelefonos")
 def tablatelefonos():
     tablatelefonos = controladortele.obtener_telefonos()
@@ -122,7 +141,7 @@ def formulario_editar_proveedor(id_proveedores):
     obtenpro_id=controladorprove.obtener_prove_por_id(id_proveedores)
     return render_template("editprove.html", obtenpro_id=obtenpro_id)
 
-
+#----------------------metodos de cliente-------------------------------
 @app.route("/mostrartodoslosclientes")
 def mostrartodoslosclientes():
     mostrartodoslosclientes=controladorclien.obtener_clientes()
@@ -131,7 +150,7 @@ def mostrartodoslosclientes():
 @app.route("/mostrartodoslosclientesinsert")
 def mostrartodoslosclientesinsert():
     mostrartodoslosclientesinsert=controladorclien.obtener_clientes()
-    return render_template("agregarclientes.html",mostrartodoslosclientesinsert=mostrartodoslosclientesinsert)
+    return render_template("agregarclien.html",mostrartodoslosclientesinsert=mostrartodoslosclientesinsert)
 
 @app.route("/insertarcliente", methods=["POST"])
 def insertarcliente():
@@ -144,7 +163,7 @@ def insertarcliente():
 @app.route("/eliminar_cliente", methods=["POST"])
 def eliminar_cliente():
     id = request.form["id"]
-    controladorclien.conectar(id)
+    controladorclien.eliminar_cliente(id)
     return redirect("/mostrartodoslosclientes")
 
 @app.route("/actualizar_cliente", methods=["POST"])
@@ -154,13 +173,13 @@ def actualizar_cliente():
     numero_telefono = request.form["numero_telefono"]
     direccion=request.form["direccion"]
     
-    controladorclien.actualizar_clientes(id_clientes,nombre_cliente,numero_telefono,direccion)
+    controladorclien.actualizar_clientes(nombre_cliente,numero_telefono,direccion,id_clientes)
     return redirect("/mostrartodoslosclientes")
 
 @app.route("/formulario_editar_cliente/<int:id_clientes>")
 def formulario_editar_cliente(id_clientes):
     # Obtener el juego por ID
-    obtenclien_id=controladorprove.obtener_prove_por_id(id_clientes)
+    obtenclien_id=controladorclien.obtener_cliente_por_id(id_clientes)
     return render_template("editclientes.html", obtenclien_id=obtenclien_id)
 
 if __name__ == '__main__':

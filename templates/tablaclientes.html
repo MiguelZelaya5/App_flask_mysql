@@ -1,0 +1,50 @@
+{% extends "todointerfaz.html" %}
+{% block titulo %}
+Tabla telefonos
+{% endblock %}
+{% block contenido %}
+
+<div class="container">
+	<div>
+		<div class="col-md-12 text-center"><h1>Lista de Clientes</h1></div>
+	</div>
+	<div class="d-flex justify-content-end">
+		<a href="{{url_for('mostrartodoslosclientesinsert')}}" class="btn btn-primary btn-md active ml-auto" role="button" aria-pressed="true">Agregar</a>
+		
+	</div>
+	<br />
+	<table class="table table-hover table-striped table-bordered" id="example">
+		<thead style="background-color: rgb(202, 199, 194); color: #121213;">
+			<th>Id</th>
+			<th>Nombre Clientes</th>
+			<th>Numero de Telefono</th>
+			<th>Direccion</th>
+            <th>Acciones</th>
+		</thead>
+		<tbody>
+			{% for mostrartodosloscliente in mostrartodoslosclientes %}
+			<tr>
+				<td>{{mostrartodosloscliente[0]}}</td>
+				<td>{{mostrartodosloscliente[1]}}</td>
+				<td>{{mostrartodosloscliente[2]}}</td>
+				<td>{{mostrartodosloscliente[3]}}</td>
+				
+				<td class="col-sm-2">
+					<div class="d-flex justify-content-center">
+						<a href="{{url_for('formulario_editar_cliente',id_clientes=mostrartodosloscliente[0])}}" class="btn btn-primary btn-sm active"> Actualizar</a>
+						<div class="mx-2"></div>
+						<form action="{{url_for('eliminar_cliente')}}" method="POST">
+							<input type="hidden" name="id" value="{{mostrartodosloscliente[0]}}">
+							<button class="btn btn-danger">Eliminar</button>
+						</form>
+					</div>
+					
+					
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+{% endblock %}
