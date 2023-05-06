@@ -6,9 +6,9 @@ Agregar telefono
 <section class="section">
     <div class="colums">
       <div class="column">
-        <h3 class="is-size-3">Telefono</h3>
+        <h3 class="is-size-3">Proveedores</h3>
         <!--Falta el metodo-->
-        <form action="{{ url_for('') }}" method="POST" >
+        <form action="{{ url_for('insertarproveedor') }}" method="POST" >
           <div class="form-group row mb-4">
             <div class="col-sm-6">
               <label>Nombre del proveedor</label>
@@ -18,27 +18,33 @@ Agregar telefono
               <label>Numero de telefono</label>
               <input type="text" class="form-control" name="numero_telefonico">
             </div>
+            <div class="col-sm-6">
+              <label>Estado</label>
+              <input type="text" class="form-control" name="estado">
+            </div>
           </div>
           
           <div class="form-group row mb-4">
-            <button type="submit" class="btn btn-success">Agregar</button>
-            
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn-primary btn-group-lg active">Agregar</button>
+              <a href="{{url_for('mostrartodoslosproveedores')}}" class="btn btn-primary btn-group-lg active">Volver</a>
+            </div>
           </div>
           <table class="table table-hover table-striped table-bordered" id="example">
             <thead style="background-color: rgb(202, 199, 194); color: #121213;">
               <th>Id</th>
               <th>Nombre Proveedor</th>
               <th>Numero de Telefono</th>
+              <th>Estado</th>
               
             </thead>
             <tbody>
-              {% for tablatelefono in tablatelefonos %}
+              {% for mostrartodoslosproveedore in mostrartodoslosproveedores %}
               <tr>
-                <td>{{tablatelefono[0]}}</td>
-                <td>{{tablatelefono[1]}}</td>
-                <td>{{tablatelefono[2]}}</td>
-                
-                
+                <td>{{mostrartodoslosproveedore[0]}}</td>
+                <td>{{mostrartodoslosproveedore[1]}}</td>
+                <td>{{mostrartodoslosproveedore[2]}}</td>
+                <td>{{mostrartodoslosproveedore[3]}}</td>
               </tr>
               {% endfor %}
             </tbody>

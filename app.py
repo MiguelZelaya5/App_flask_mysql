@@ -17,6 +17,9 @@ mysql = MySQL(app)
 @app.route("/formularioagregartelefono")
 def formularioagregartelefono():
      return render_template("agregartelefono.html")
+@app.route("/formularioagregarproveedor")
+def formularioagregarproveedor():
+     return render_template("agregarprov.html")
 @app.route("/insert", methods=["POST"])
 def insert():
     nombre_telefono = request.form["nombre_telefono"]
@@ -81,7 +84,7 @@ def actualizar_telefono():
 @app.route("/mostrartodoslosproveedores")
 def mostrartodoslosproveedores():
     mostrartodoslosproveedores=controladorprove.obtener_prov()
-    return render_template("tablaproveedores.html",mostrartodoslosproveedores=mostrartodoslosproveedores)
+    return render_template("tablaproveedor.html",mostrartodoslosproveedores=mostrartodoslosproveedores)
 
 @app.route("/mostrartodoslosproveedoresinsert")
 def mostrartodoslosproveedoresinsert():
@@ -94,13 +97,13 @@ def insertarproveedor():
     numero_telefonico=request.form["numero_telefonico"]
     estado=request.form["estado"]
     controladorprove.insertar_prov(nombre_proveedor,numero_telefonico,estado)
-    return redirect("/agregarprov.html")
+    return redirect("/mostrartodoslosproveedoresinsert")
 
 @app.route("/eliminar_proveedor", methods=["POST"])
 def eliminar_proveedor():
     id = request.form["id"]
     controladorprove.eliminar_prov(id)
-    return redirect("/tablaproveedor")
+    return redirect("/mostrartodoslosproveedores")
 
 @app.route("/actualizar_proveedor", methods=["POST"])
 def actualizar_proveedor():
@@ -109,11 +112,11 @@ def actualizar_proveedor():
     numero_telefonico = request.form["numero_telefonico"]
     estado=request.form["estado"]
     
-    controladortele.actualizar_telefonos(id_proveedores,nombre_proveedor,numero_telefonico,estado)
-    return redirect("/tablatelefonos")
+    controladorprove.actualizar_prov(id_proveedores,nombre_proveedor,numero_telefonico,estado)
+    return redirect("/mostrartodoslosproveedores")
 
 @app.route("/formulario_editar_proveedor/<int:id_proveedores>")
-def formulario_editar_telefono(id_proveedores):
+def formulario_editar_proveedor(id_proveedores):
     # Obtener el juego por ID
     obtenpro_id=controladorprove.obtener_prove_por_id(id_proveedores)
     return render_template("editprove.html", obtenpro_id=obtenpro_id)

@@ -1,0 +1,47 @@
+{% extends "todointerfaz.html" %}
+{% block titulo %}
+Editar Telefono
+{% endblock %}
+{% block contenido %}
+<section class="section">
+    <div class="columns">
+        <div class="column">
+            <h3 class="is-size-3">Editar Proveedores</h3>
+            <form action="{{url_for('actualizar_proveedor')}}" method="post">
+                {# Enviar el id en un campo oculto #}
+                <input type="hidden" name="id_proveedores" value="{{obtenpro_id[0]}}">
+                <div class="form-group row mb-4">
+                    <div class="col-sm-4">
+                        <label for="nombre">Nombre Proveedor:</label>
+                        <input value="{{obtenpro_id[1]}}" required type="text" class="form-control" placeholder="" name="nombre_proveedor" id="nombre_proveedor">
+                    </div>
+                </div>
+                <div class="form-group row mb-4">
+                    <div class="col-sm-4">
+                        <label for="marca">Numero Telefonico:</label>
+                        <input value="{{obtenpro_id[2]}}" required type="text" class="form-control" placeholder="" name="numero_telefonico" id="numero_telefonico">
+                    </div>
+                </div>
+                <div class="form-group row mb-4">
+                    <div class="col-sm-4">
+                        <label for="estado">Estado:</label>
+                        <input value="{{obtenpro_id[3]}}" required type="text" class="form-control" placeholder="" name="estado" id="estado">
+                    </div>
+                </div>
+                <div class="form-group row mb-4">
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-primary btn-group-lg active">Guardar</button>
+                        <a href="{{url_for('mostrartodoslosproveedores')}}" class="btn btn-primary btn-group-lg active">Volver</a>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+            </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
