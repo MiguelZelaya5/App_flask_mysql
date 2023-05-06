@@ -16,9 +16,9 @@ mydb = conectar
 mysql = MySQL(app)
 
 usuarios = [
-    {"usuario": "juan", "contraseña": "1234"},
-    {"usuario": "ana", "contraseña": "abcd"},
-    {"usuario": "pedro", "contraseña": "qwerty"}
+    {"usuario": "juan@gmail.com", "contraseña": "123456"},
+    {"usuario": "anafernada@gmail.com", "contraseña": "aceiteDuro"},
+    {"usuario": "pedropascal@gmail.com", "contraseña": "JoelTheLast"}
 ]
 
 @app.route("/")
