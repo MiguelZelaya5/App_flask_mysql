@@ -23,6 +23,11 @@ Agregar telefono
               <input type="text" class="form-control" name="direccion">
             </div>
           </div>
+          <div class="col-sm-6">
+            <label>estado</label>
+            <input type="text" class="form-control" name="estado">
+          </div>
+        </div>
           
           <div class="form-group row mb-4">
             <div class="col-sm-12">
@@ -36,6 +41,7 @@ Agregar telefono
               <th>Nombre Cliente</th>
               <th>Numero de Telefono</th>
               <th>Direccion</th>
+              <th>Estado</th>
               
             </thead>
             <tbody>
@@ -45,6 +51,7 @@ Agregar telefono
                 <td>{{mostrartodosloscliente[1]}}</td>
                 <td>{{mostrartodosloscliente[2]}}</td>
                 <td>{{mostrartodosloscliente[3]}}</td>
+                <td>{{mostrartodosloscliente[4]}}</td>
               </tr>
               {% endfor %}
             </tbody>
