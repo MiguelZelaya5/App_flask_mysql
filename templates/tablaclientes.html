@@ -19,6 +19,7 @@ Tabla telefonos
 			<th>Nombre Clientes</th>
 			<th>Numero de Telefono</th>
 			<th>Direccion</th>
+			<th>Estado</th>
             <th>Acciones</th>
 		</thead>
 		<tbody>
@@ -28,7 +29,7 @@ Tabla telefonos
 				<td>{{mostrartodosloscliente[1]}}</td>
 				<td>{{mostrartodosloscliente[2]}}</td>
 				<td>{{mostrartodosloscliente[3]}}</td>
-				
+				<td>{{mostrartodosloscliente[4]}}</td>
 				<td class="col-sm-2">
 					<div class="d-flex justify-content-center">
 						<a href="{{url_for('formulario_editar_cliente',id_clientes=mostrartodosloscliente[0])}}" class="btn btn-primary btn-sm active"> Actualizar</a>

@@ -12,7 +12,7 @@ def obtener_clientes():
     conexion= conectar()
     clientes = []
     with conexion.cursor() as cursor:
-        cursor.execute("select id_clientes, nombre_cliente, numero_telefono, direccion from clientes")
+        cursor.execute("select id_clientes, nombre_cliente, numero_telefono, direccion, estado from clientes")
         clientes = cursor.fetchall()
     conexion.close()
     return clientes
@@ -20,7 +20,7 @@ def obtener_clientes():
 def eliminar_cliente(id_clientes):
     conexion= conectar()
     with conexion.cursor() as cursor:
-        cursor.execute("DELETE FROM clientes where id_clientes=%s",
+        cursor.execute("UPDATE clientes SET estado = 'I' where id_clientes=%s",
                        (id_clientes))
     conexion.commit()
     conexion.close()
