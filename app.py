@@ -163,7 +163,8 @@ def insertarcliente():
     nombre_cliente = request.form["nombre_cliente"]
     numero_telefono=request.form["numero_telefono"]
     direccion=request.form["direccion"]
-    controladorclien.insertar_clientes(nombre_cliente,numero_telefono,direccion)
+    estado=request.form['estado']
+    controladorclien.insertar_clientes(nombre_cliente,numero_telefono,direccion,estado=estado)
     return redirect("/mostrartodoslosclientesinsert")
 
 @app.route("/eliminar_cliente", methods=["POST"])
@@ -178,8 +179,9 @@ def actualizar_cliente():
     nombre_cliente = request.form["nombre_cliente"]
     numero_telefono = request.form["numero_telefono"]
     direccion=request.form["direccion"]
+    estado=request.form["estado"]
     
-    controladorclien.actualizar_clientes(nombre_cliente,numero_telefono,direccion,id_clientes)
+    controladorclien.actualizar_clientes(nombre_cliente,numero_telefono,direccion,estado,id_clientes)
     return redirect("/mostrartodoslosclientes")
 
 @app.route("/formulario_editar_cliente/<int:id_clientes>")
